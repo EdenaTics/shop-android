@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">shop</string>
+    <!-- FB -->
+    <string name="facebook_app_id">1961548330596898</string>
+    <string name="fb_login_protocol_scheme">fb1961548330596898</string>
+
+    <string name="error">Erreur</string>
+
+</resources>
