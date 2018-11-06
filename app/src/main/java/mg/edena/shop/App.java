@@ -15,6 +15,8 @@ import com.facebook.appevents.AppEventsLogger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import mg.edena.shop.utils.edena.EDAcrReportCrash;
+
 
 public class App extends Application {
 
@@ -29,6 +31,7 @@ public class App extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		EDAcrReportCrash.getInstance(this).init();
 		//FacebookSdk.sdkInitialize(getApplicationContext());
 		AppEventsLogger.activateApp(this);
 		mApp = this;
