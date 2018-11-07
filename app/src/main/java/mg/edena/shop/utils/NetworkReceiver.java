@@ -17,17 +17,20 @@ public class NetworkReceiver extends BroadcastReceiver {
 	//adb shell am broadcast -a android.net.wifi.STATE_CHANGE
 
 	Activity act;
+	NetworkListner networkListner;
 
 	public NetworkReceiver(Activity act) {
 		super();
 		this.act = act;
+		networkListner = (NetworkListner)act;
 	}
 
 	@Override
 	public void onReceive(final Context context, final Intent intent) {
 
 		boolean isConnected = isConnected(context);
-		send(context, isConnected, isConnected?"Internet estabilished":"No internet");
+		//send(context, isConnected, isConnected?"Internet estabilished":"No internet");
+		if(networkListner != null) networkListner.isOnline(isConnected,isConnected?"Internet estabilished":"No internet");
 
 	}
 
@@ -77,4 +80,56 @@ public class NetworkReceiver extends BroadcastReceiver {
 		}
 		return isConnected;
 	}
+
+	public interface NetworkListner{
+		public void isOnline(boolean status, String labelStatus);
+	}
+
+	/*
+	ConnectedNetworkReceiver connectedNetworkReceiver = new ConnectedNetworkReceiver();
+	private class ConnectedNetworkReceiver extends BroadcastReceiver
+	{
+
+		private NetworkReceiver registerReceiver = new NetworkReceiver(BaseActivity.this);
+
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			toast(intent.getStringExtra(NetworkReceiver.NETWORK_STATUS_LABEL_EXTRA),GlideToast.INFOTOAST);
+
+		}
+
+		public void register()
+		{
+			try {
+				registerReceiver.register();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try
+			{
+
+				IntentFilter intentFilter = new IntentFilter();
+				intentFilter.addAction(NetworkReceiver.NETWORK_ACTION);
+				registerReceiver(this, intentFilter);
+			}
+			catch (Exception ex)
+			{
+				ex.printStackTrace();
+			}
+		}
+
+		public void unregister(){
+			try {
+				registerReceiver.unregister();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			try {
+				unregisterReceiver(this);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	 */
 }

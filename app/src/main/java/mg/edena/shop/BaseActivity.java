@@ -12,10 +12,11 @@ import com.jeevandeshmukh.glidetoastlib.GlideToast;
 
 import mg.edena.shop.utils.NetworkReceiver;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements NetworkReceiver.NetworkListner {
 
-	private NetworkReceiver registerReceiver = new NetworkReceiver(this);
 
+
+	NetworkReceiver networkReceiver = new NetworkReceiver(this);
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,43 +35,23 @@ public class BaseActivity extends AppCompatActivity {
 		super.onDestroy();
 	}
 
+	@Override
+	public void isOnline(boolean status, String labelStatus) {
+		toast(labelStatus,GlideToast.INFOTOAST);
+	}
+
+
 	private void registerNetworkReceiver(){
-		registerReceiver.register();
-		connectedNetworkReceiver.register();
+		//connectedNetworkReceiver.register();
+		networkReceiver.register();
 	}
 
 	private void unregisterNetworkReceiver(){
-		registerReceiver.unregister();
-		connectedNetworkReceiver.unregister();
+		//connectedNetworkReceiver.unregister();
+		networkReceiver.unregister();
 	}
 
-	ConnectedNetworkReceiver connectedNetworkReceiver = new ConnectedNetworkReceiver();
-	private class ConnectedNetworkReceiver extends BroadcastReceiver
-	{
-		@Override
-		public void onReceive(Context context, Intent intent) {
-			toast(intent.getStringExtra(NetworkReceiver.NETWORK_STATUS_LABEL_EXTRA),GlideToast.INFOTOAST);
 
-		}
 
-		public void register()
-		{
-			try
-			{
-
-				IntentFilter intentFilter = new IntentFilter();
-				intentFilter.addAction(NetworkReceiver.NETWORK_ACTION);
-				registerReceiver(this, intentFilter);
-			}
-			catch (Exception ex)
-			{
-				ex.printStackTrace();
-			}
-		}
-
-		public void unregister(){
-			unregisterReceiver(this);
-		}
-	}
 
 }
