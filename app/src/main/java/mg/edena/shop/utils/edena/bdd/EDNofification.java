@@ -1,4 +1,4 @@
-package mg.edena.shop.utils.edena;
+package mg.edena.shop.utils.edena.bdd;
 
 import android.app.NotificationManager;
 import android.content.Context;

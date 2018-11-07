@@ -12,10 +12,9 @@ import org.greenrobot.eventbus.EventBus;
 import java.io.File;
 import java.io.IOException;
 
-import mg.edena.compiled.utils.edena.EDEventBus;
-import mg.edena.compiled.utils.edena.EDNofification;
-import mg.edena.compiled.utils.edena.chooser.FileUtils;
-import mg.edena.compiled.utils.munix.Files;
+
+import mg.edena.shop.utils.edena.bdd.EDNofification;
+import mg.edena.shop.utils.edena.chooser.FileUtils;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -101,7 +100,7 @@ public class EDDownloadService extends IntentService implements EDFileDownload.I
             _notifcation.setText("Downloading file "+loadedPercent+"%");
             _notifcation.send();
         }
-        EDEventBus.getInstance(null).post(new EDEventBus(EVENT_BUS_NAME,loadedPercent));
+        //EDEventBus.getInstance(null).post(new EDEventBus(EVENT_BUS_NAME,loadedPercent));
     }
 
     @Override
@@ -113,7 +112,7 @@ public class EDDownloadService extends IntentService implements EDFileDownload.I
             else _notifcation.setText("File Downloaded error");
             _notifcation.send();
         }
-        EDEventBus.getInstance(null).post(new EDEventBus(EVENT_BUS_NAME,save));
+        //EDEventBus.getInstance(null).post(new EDEventBus(EVENT_BUS_NAME,save));
     }
 
     private interface IRetrofit{

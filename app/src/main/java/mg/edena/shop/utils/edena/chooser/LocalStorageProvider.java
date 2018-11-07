@@ -1,8 +1,5 @@
 package mg.edena.shop.utils.edena.chooser;
 
-/**
- * Created by edena on 18/01/2017.
- */
 
 
 import android.content.res.AssetFileDescriptor;

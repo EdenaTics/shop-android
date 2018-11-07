@@ -44,7 +44,6 @@ public  class  EDDaoExistHelper  extends SQLiteOpenHelper {
                 + context.getApplicationContext().getPackageName() + "/databases/"
                 + EDBdd.DATABASE_NAME_TEST;
                 */
-        // Si la bdd n'existe pas dans le dossier de l'app
         if (!checkDatabase()) {
             // copy db de 'assets' vers DATABASE_PATH
             copyDatabase();
@@ -52,7 +51,6 @@ public  class  EDDaoExistHelper  extends SQLiteOpenHelper {
     }
 
     private boolean checkDatabase() {
-        // retourne true/false si la bdd existe dans le dossier de l'app
         File dbfile = new File(_dataBasePath + _dbName);
         return dbfile.exists();
     }
