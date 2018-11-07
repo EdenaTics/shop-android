@@ -15,6 +15,7 @@ import com.facebook.appevents.AppEventsLogger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+import mg.edena.shop.utils.CommonUtils;
 import mg.edena.shop.utils.edena.EDAcrReportCrash;
 
 
@@ -36,7 +37,7 @@ public class App extends Application {
 		AppEventsLogger.activateApp(this);
 		mApp = this;
 		mPref = this.getApplicationContext().getSharedPreferences("shop_key", MODE_PRIVATE);
-		getKeyHash();
+		CommonUtils.getKeyHash(this);
 	}
 
 	public boolean isFirstRun() {
@@ -57,18 +58,5 @@ public class App extends Application {
 
 	}
 
-	private void getKeyHash() {
-		try {
-			PackageInfo info = getPackageManager().getPackageInfo("facebooklocation.facebooklocation", PackageManager.GET_SIGNATURES);
-			for (Signature signature : info.signatures) {
-				MessageDigest md = MessageDigest.getInstance("SHA");
-				md.update(signature.toByteArray());
-				Log.d("KeyHash:", Base64.encodeToString(md.digest(), Base64.DEFAULT));
-			}
-		} catch (PackageManager.NameNotFoundException e) {
 
-		} catch (NoSuchAlgorithmException e) {
-
-		}
-	}
 }

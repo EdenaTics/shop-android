@@ -70,6 +70,7 @@ public class MainActivity extends BaseActivity {
 							GraphResponse response) {
 						try {
 							toast("Bienvenue "+object.getString("name"),GlideToast.SUCCESSTOAST);
+							startActivity(new Intent(MainActivity.this,HomeActivity.class));
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}
