@@ -160,4 +160,5 @@ public class HomeActivity extends BaseActivity {
 		mHideHandler.removeCallbacks(mHideRunnable);
 		mHideHandler.postDelayed(mHideRunnable, delayMillis);
 	}
+
 }

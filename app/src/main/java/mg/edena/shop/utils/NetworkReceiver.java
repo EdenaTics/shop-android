@@ -18,6 +18,7 @@ public class NetworkReceiver extends BroadcastReceiver {
 
 	Activity act;
 	NetworkListner networkListner;
+	public boolean connected;
 
 	public NetworkReceiver(Activity act) {
 		super();
@@ -29,6 +30,7 @@ public class NetworkReceiver extends BroadcastReceiver {
 	public void onReceive(final Context context, final Intent intent) {
 
 		boolean isConnected = isConnected(context);
+		connected = isConnected;
 		//send(context, isConnected, isConnected?"Internet estabilished":"No internet");
 		if(networkListner != null) networkListner.isOnline(isConnected,isConnected?"Internet estabilished":"No internet");
 
