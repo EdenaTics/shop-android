@@ -1,8 +1,11 @@
 package mg.edena.shop;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -12,6 +15,12 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseUser;
 import com.jeevandeshmukh.glidetoastlib.GlideToast;
 
 import org.json.JSONException;
@@ -20,8 +29,11 @@ import org.json.JSONObject;
 import java.util.Arrays;
 
 public class MainActivity extends BaseActivity {
+	private final static String TAG = MainActivity.class.getName();
+
 	LoginButton mFBLoginBtn;
 	CallbackManager mFBCallbackManager;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +50,8 @@ public class MainActivity extends BaseActivity {
 			@Override
 			public void onSuccess(LoginResult loginResult) {
 				AccessToken accessToken = loginResult.getAccessToken();
-				getFbInformation(accessToken);
+				//getFbInformation(accessToken);
+				handleFacebookAccessToken(accessToken);
 
 			}
 
@@ -49,9 +62,13 @@ public class MainActivity extends BaseActivity {
 
 			@Override
 			public void onError(FacebookException exception) {
-				toast(getString(R.string.error),GlideToast.FAILTOAST);
+				//toast(getString(R.string.error),GlideToast.FAILTOAST);
 			}
 		});
+
+		if(App.getInstance().getTokenUser() != null){
+			handleFacebookAccessToken(App.getInstance().getTokenUser());
+		}
 	}
 
 	@Override
@@ -59,6 +76,30 @@ public class MainActivity extends BaseActivity {
 		mFBCallbackManager.onActivityResult(requestCode, resultCode, data);
 		super.onActivityResult(requestCode, resultCode, data);
 	}
+
+
+	private void handleFacebookAccessToken(AccessToken token) {
+		Log.d(TAG, "handleFacebookAccessToken:" + token);
+
+		AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+		mAuth.signInWithCredential(credential)
+				.addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+					@Override
+					public void onComplete(@NonNull Task<AuthResult> task) {
+						if (task.isSuccessful()) {
+							Log.d(TAG, "signInWithCredential:success");
+							FirebaseUser user = mAuth.getCurrentUser();
+							gotoHomeMainPage();
+						} else {
+							Log.w(TAG, "signInWithCredential:failure", task.getException());
+							//toast(TAG, "Authentication failed.");
+
+						}
+
+					}
+				});
+	}
+
 
 	private void getFbInformation(AccessToken accessToken){
 		GraphRequest request = GraphRequest.newMeRequest(
@@ -70,8 +111,9 @@ public class MainActivity extends BaseActivity {
 							GraphResponse response) {
 						try {
 							toast("Bienvenue "+object.getString("name"),GlideToast.SUCCESSTOAST);
-							startActivity(new Intent(MainActivity.this,HomeActivity.class));
-						} catch (JSONException e) {
+							gotoHomePage();
+							}
+								catch (JSONException e) {
 							e.printStackTrace();
 						}
 
@@ -82,4 +124,6 @@ public class MainActivity extends BaseActivity {
 		request.setParameters(parameters);
 		request.executeAsync();
 	}
+
+
 }

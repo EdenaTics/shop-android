@@ -1,23 +1,15 @@
 package mg.edena.shop;
 
 import android.app.Application;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
-import android.util.Base64;
-import android.util.Log;
+import android.databinding.DataBindingUtil;
 
 import com.facebook.AccessToken;
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import com.facebook.login.LoginManager;
+import com.google.firebase.auth.FirebaseAuth;
 
 import mg.edena.shop.utils.CommonUtils;
-import mg.edena.shop.utils.edena.EDAcrReportCrash;
-
 
 public class App extends Application {
 
@@ -32,12 +24,10 @@ public class App extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		EDAcrReportCrash.getInstance(this).init();
-		//FacebookSdk.sdkInitialize(getApplicationContext());
-		AppEventsLogger.activateApp(this);
 		mApp = this;
 		mPref = this.getApplicationContext().getSharedPreferences("shop_key", MODE_PRIVATE);
 		CommonUtils.getKeyHash(this);
+
 	}
 
 	public boolean isFirstRun() {
@@ -50,12 +40,24 @@ public class App extends Application {
 		edit.commit();
 	}
 
-	public boolean isLoggedInFB(){
+	public void verifyConnect(){
+		if(getTokenUser() == null)  startLoginView();
+	}
 
+	public AccessToken getTokenUser(){
 		AccessToken accessToken = AccessToken.getCurrentAccessToken();
-		boolean isLoggedIn = accessToken != null && !accessToken.isExpired();
-		return  isLoggedIn;
+		if(accessToken != null && !accessToken.isExpired()) return accessToken;
+		else return null;
+	}
 
+	protected void deconnect(){
+		LoginManager.getInstance().logOut();
+		FirebaseAuth.getInstance().signOut();
+		startLoginView();
+	}
+
+	public void startLoginView(){
+		startActivity(new Intent(this,MainActivity.class));
 	}
 
 

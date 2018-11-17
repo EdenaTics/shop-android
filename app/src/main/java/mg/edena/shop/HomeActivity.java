@@ -76,6 +76,7 @@ public class HomeActivity extends BaseActivity {
 	private final View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
 		@Override
 		public boolean onTouch(View view, MotionEvent motionEvent) {
+			App.getInstance().deconnect();
 			if (AUTO_HIDE) {
 				delayedHide(AUTO_HIDE_DELAY_MILLIS);
 			}

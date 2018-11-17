@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "581495154695",
+    "firebase_url": "https://shop-edena.firebaseio.com",
+    "project_id": "shop-edena",
+    "storage_bucket": "shop-edena.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:581495154695:android:5268f2e18daf6f8a",
+        "android_client_info": {
+          "package_name": "mg.edena.shop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "581495154695-a85a2ttga4gtghf8leluo8u3hh16rsn9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCO7eSAUJ-8x6a02koUQcnoa7hSw4FspIA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

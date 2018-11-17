@@ -44,16 +44,17 @@
                 <data android:scheme="@string/fb_login_protocol_scheme"/>
             </intent-filter>
         </activity>
-
-        <service android:name=".utils.edena.retrofit.EDDownloadService"/>
-
         <activity
             android:name=".HomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_home"
             android:theme="@style/FullscreenTheme">
         </activity>
-
+        <activity
+            android:name=".HomeMainActivity"
+            android:label="@string/title_activity_home_main"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
