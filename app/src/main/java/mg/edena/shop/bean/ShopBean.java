@@ -7,6 +7,10 @@ public class ShopBean implements Parcelable {
 	private String title;
 	private String desc;
 
+
+	public ShopBean() {
+	}
+
 	public ShopBean(String title, String desc) {
 		this.title = title;
 		this.desc = desc;
@@ -28,7 +32,6 @@ public class ShopBean implements Parcelable {
 			return new ShopBean[size];
 		}
 	};
-
 
 
 

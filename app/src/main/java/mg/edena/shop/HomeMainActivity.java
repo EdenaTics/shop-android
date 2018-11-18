@@ -49,7 +49,7 @@ public class HomeMainActivity extends BaseActivity
 
 		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
-		setViewDrawer();
+		setViewDrawer(navigationView);
 		setUpRecyclerView();
 	}
 
@@ -106,9 +106,9 @@ public class HomeMainActivity extends BaseActivity
 		return true;
 	}
 
-	private void setViewDrawer(){
-		((TextView)findViewById(R.id.name)).setText("Test test");
-		((TextView)findViewById(R.id.email)).setText("test@test.com");
+	private void setViewDrawer(View v){
+		((TextView)v.findViewById(R.id.name)).setText("Test test");
+		((TextView)v.findViewById(R.id.email)).setText("test@test.com");
 	}
 
 	private void setUpRecyclerView() {

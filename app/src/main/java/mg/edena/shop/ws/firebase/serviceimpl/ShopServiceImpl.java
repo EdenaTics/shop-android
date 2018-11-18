@@ -9,7 +9,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import mg.edena.shop.bean.ShopBean;
 import mg.edena.shop.service.ServiceCallbackBean;
 import mg.edena.shop.service.ServiceDelegate;
-import mg.edena.shop.service.ShopService;
+import mg.edena.shop.service.app.ShopService;
 
 public class ShopServiceImpl extends FireStoreBase implements ShopService {
 

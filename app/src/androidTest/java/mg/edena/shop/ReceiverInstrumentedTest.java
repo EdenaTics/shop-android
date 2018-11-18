@@ -15,17 +15,21 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import mg.edena.shop.utils.NetworkReceiver;
+import java.util.Collections;
+import java.util.List;
 
+import io.reactivex.Observable;
+import mg.edena.shop.bean.User;
+import mg.edena.shop.utils.NetworkReceiver;
+import mg.edena.shop.ws.retrofit.BaseRetrofit;
+import mg.edena.shop.ws.retrofit.RetrofitService;
+import mg.edena.shop.ws.retrofit.impl.UserRetrofit;
+
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
 
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 @RunWith(AndroidJUnit4.class)
-public class ExampleInstrumentedTest {
+public class ReceiverInstrumentedTest {
 	@Rule public ActivityTestRule<HomeActivity> homeActivityActivityTestRule = new ActivityTestRule<>(HomeActivity.class);
 
 	@Test
@@ -51,4 +55,7 @@ public class ExampleInstrumentedTest {
 
 
 	}
+
+
+
 }
