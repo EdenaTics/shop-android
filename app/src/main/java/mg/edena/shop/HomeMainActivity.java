@@ -23,6 +23,7 @@ import java.util.List;
 import mg.edena.shop.adapter.ShopListAdapter;
 import mg.edena.shop.bean.ShopBean;
 import mg.edena.shop.bean.User;
+import mg.edena.shop.fragment.ShopListFragment;
 import mg.edena.shop.service.img.ImgDownloadServiceImpl;
 
 public class HomeMainActivity extends BaseActivity
@@ -55,7 +56,8 @@ public class HomeMainActivity extends BaseActivity
 
 
 		setViewDrawer(navigationView.getHeaderView(0));
-		setUpRecyclerView();
+		addFragment(ShopListFragment.newInstance(),R.id.idFragment);
+
 	}
 
 	@Override
@@ -121,15 +123,5 @@ public class HomeMainActivity extends BaseActivity
 
 	}
 
-	private void setUpRecyclerView() {
-		RecyclerView recyclerView = findViewById(R.id.list);
-		recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
-		//recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), VERTICAL));
-		List<ShopBean> list = new ArrayList<>();
-		list.add(new ShopBean("Emily","Veste rouge, pantalon noir"));
-		list.add(new ShopBean("Julien","Veste bleu, pantalon blanc"));
-		list.add(new ShopBean("Eden","Veste noir, pantalon noir"));
-		ShopListAdapter adapterList = new ShopListAdapter(list);
-		recyclerView.setAdapter(adapterList);
-	}
+
 }

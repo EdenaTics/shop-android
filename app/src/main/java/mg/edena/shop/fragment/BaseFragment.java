@@ -15,4 +15,6 @@ public class BaseFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 	}
 
+
+
 }

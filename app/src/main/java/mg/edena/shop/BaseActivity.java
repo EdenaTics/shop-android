@@ -1,8 +1,12 @@
 package mg.edena.shop;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,9 +48,6 @@ public class BaseActivity extends AppCompatActivity implements NetworkReceiver.N
 		toast(labelStatus,GlideToast.INFOTOAST);
 	}
 
-
-
-
 	private void registerNetworkReceiver(){
 		//connectedNetworkReceiver.register();
 		networkReceiver.register();
@@ -65,11 +66,24 @@ public class BaseActivity extends AppCompatActivity implements NetworkReceiver.N
 
 	public void gotoHomeMainPage(){
 		startActivity(new Intent(this,HomeMainActivity.class));
-
 	}
 
 	public void toast(String mess, String type){
 		new GlideToast.makeToast(this,mess, GlideToast.LENGTHLONG, type).show();
+	}
+
+	public void replaceFragment(Fragment fragment, int idLayout){
+		FragmentManager fragmentManager =  getSupportFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.replace(idLayout, fragment);
+		fragmentTransaction.commit();
+	}
+
+	public void addFragment(Fragment fragment, int idLayout){
+		FragmentManager fragmentManager =  getSupportFragmentManager();
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.add(idLayout, fragment);
+		fragmentTransaction.commit();
 	}
 
 }
