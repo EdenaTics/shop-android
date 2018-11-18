@@ -1,72 +1,38 @@
 package mg.edena.shop.bean;
 
-public class User {
-	/**
-	 * id : 1
-	 * provider : fb
-	 * name : test
-	 * nameFirst : first name test
-	 * providerId : 456
-	 * email : test@test.test
-	 * gender : null
-	 * birth : 2018-12-10
-	 */
+import com.google.gson.annotations.SerializedName;
 
-	private Long id;
-	private String provider;
-	private String name;
-	private String nameFirst;
-	private String providerId;
-	private String email;
+public  class User {
+	@SerializedName("birthday")
+	private String birthday;
+	@SerializedName("picture")
+	private Picture picture;
+	@SerializedName("gender")
 	private String gender;
-	private String birth;
-
-	public Long getId() {
-		return id;
+	@SerializedName("email")
+	private String email;
+	@SerializedName("last_name")
+	private String last_name;
+	@SerializedName("first_name")
+	private String first_name;
+	@SerializedName("name")
+	private String name;
+	@SerializedName("id")
+	private String id;
+	public String getBirthday() {
+		return birthday;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setBirthday(String birthday) {
+		this.birthday = birthday;
 	}
 
-	public String getProvider() {
-		return provider;
+	public Picture getPicture() {
+		return picture;
 	}
 
-	public void setProvider(String provider) {
-		this.provider = provider;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getNameFirst() {
-		return nameFirst;
-	}
-
-	public void setNameFirst(String nameFirst) {
-		this.nameFirst = nameFirst;
-	}
-
-	public String getProviderId() {
-		return providerId;
-	}
-
-	public void setProviderId(String providerId) {
-		this.providerId = providerId;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setPicture(Picture picture) {
+		this.picture = picture;
 	}
 
 	public String getGender() {
@@ -77,11 +43,103 @@ public class User {
 		this.gender = gender;
 	}
 
-	public String getBirth() {
-		return birth;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setBirth(String birth) {
-		this.birth = birth;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getLastName() {
+		return last_name;
+	}
+
+	public void setLastName(String last_name) {
+		this.last_name = last_name;
+	}
+
+	public String getFirstName() {
+		return first_name;
+	}
+
+	public void setFirstName(String first_name) {
+		this.first_name = first_name;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+
+	public static class Picture {
+		@SerializedName("data")
+		private Data data;
+
+		public Data getData() {
+			return data;
+		}
+
+		public void setData(Data data) {
+			this.data = data;
+		}
+	}
+
+	public static class Data {
+		@SerializedName("width")
+		private int width;
+		@SerializedName("url")
+		private String url;
+		@SerializedName("is_silhouette")
+		private boolean is_silhouette;
+		@SerializedName("height")
+		private int height;
+
+		public int getWidth() {
+			return width;
+		}
+
+		public void setWidth(int width) {
+			this.width = width;
+		}
+
+		public String getUrl() {
+			return url;
+		}
+
+		public void setUrl(String url) {
+			this.url = url;
+		}
+
+		public boolean isSilhouette() {
+			return is_silhouette;
+		}
+
+		public void setIslhouette(boolean is_silhouette) {
+			this.is_silhouette = is_silhouette;
+		}
+
+		public int getHeight() {
+			return height;
+		}
+
+		public void setHeight(int height) {
+			this.height = height;
+		}
+
+
 	}
 }

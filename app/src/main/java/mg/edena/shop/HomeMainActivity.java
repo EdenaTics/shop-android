@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,6 +22,8 @@ import java.util.List;
 
 import mg.edena.shop.adapter.ShopListAdapter;
 import mg.edena.shop.bean.ShopBean;
+import mg.edena.shop.bean.User;
+import mg.edena.shop.service.img.ImgDownloadServiceImpl;
 
 public class HomeMainActivity extends BaseActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
@@ -49,7 +52,9 @@ public class HomeMainActivity extends BaseActivity
 
 		NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 		navigationView.setNavigationItemSelectedListener(this);
-		setViewDrawer(navigationView);
+
+
+		setViewDrawer(navigationView.getHeaderView(0));
 		setUpRecyclerView();
 	}
 
@@ -107,8 +112,13 @@ public class HomeMainActivity extends BaseActivity
 	}
 
 	private void setViewDrawer(View v){
-		((TextView)v.findViewById(R.id.name)).setText("Test test");
-		((TextView)v.findViewById(R.id.email)).setText("test@test.com");
+		User user = App.getInstance().getUserLogged();
+		if(user == null) return;
+		((TextView)v.findViewById(R.id.name)).setText(user.getName()+" "+user.getFirstName());
+		((TextView)v.findViewById(R.id.email)).setText(user.getEmail());
+		ImageView img = ((ImageView)v.findViewById(R.id.img));
+		ImgDownloadServiceImpl.getIntance().showUrlimgInImageview(user.getPicture().getData().getUrl(),img);
+
 	}
 
 	private void setUpRecyclerView() {

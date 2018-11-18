@@ -3,12 +3,13 @@ package mg.edena.shop;
 import android.app.Application;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.databinding.DataBindingUtil;
 
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.gson.Gson;
 
+import mg.edena.shop.bean.User;
 import mg.edena.shop.utils.CommonUtils;
 
 public class App extends Application {
@@ -16,6 +17,7 @@ public class App extends Application {
 
 	private static App mApp;
 	SharedPreferences mPref;
+	private User mUserLogged;
 
 	public static App getInstance(){
 		return mApp;
@@ -41,19 +43,49 @@ public class App extends Application {
 	}
 
 	public void verifyConnect(){
-		if(getTokenUser() == null)  startLoginView();
+		if(getFbAccesToken() == null)  startLoginView();
 	}
 
-	public AccessToken getTokenUser(){
+	public AccessToken getFbAccesToken(){
 		AccessToken accessToken = AccessToken.getCurrentAccessToken();
 		if(accessToken != null && !accessToken.isExpired()) return accessToken;
 		else return null;
 	}
 
 	protected void deconnect(){
-		LoginManager.getInstance().logOut();
-		FirebaseAuth.getInstance().signOut();
+		try {
+			LoginManager.getInstance().logOut();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		try {
+			FirebaseAuth.getInstance().signOut();
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+
 		startLoginView();
+	}
+
+	public User getUserLogged() {
+			User user = null;
+			try {
+				user = new Gson().fromJson(mPref.getString("user_log", null), User.class);
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+		 return user;
+	}
+
+	public void setUserLogged(User mUserLogged) {
+		try {
+			SharedPreferences.Editor edit = mPref.edit();
+			edit.putString("user_log", new Gson().toJson(mUserLogged));
+			edit.commit();
+			this.mUserLogged = mUserLogged;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void startLoginView(){
