@@ -40,7 +40,7 @@ public class ShopListFragment extends BaseFragment {
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		mShopViewModel = ViewModelProviders.of(this).get(ShopListFragemntViewModel.class);
-		mShopViewModel.getHeroes().observe(this, new Observer<List<ShopBean>>() {
+		mShopViewModel.getList().observe(this, new Observer<List<ShopBean>>() {
 			@Override
 			public void onChanged(@Nullable List<ShopBean> list) {
 				ShopListAdapter adapterList = new ShopListAdapter(list);

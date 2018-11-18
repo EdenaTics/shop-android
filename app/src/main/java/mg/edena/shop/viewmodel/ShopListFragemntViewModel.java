@@ -14,15 +14,15 @@ public class ShopListFragemntViewModel extends ViewModel {
 
 	private MutableLiveData<List<ShopBean>> list;
 
-	public LiveData<List<ShopBean>> getHeroes() {
+	public LiveData<List<ShopBean>> getList() {
 		if (list == null) {
 			list = new MutableLiveData<List<ShopBean>>();
-			getList();
+			getData();
 		}
 		return list;
 	}
 
-	private void getList() {
+	private void getData() {
 		List<ShopBean> list = new ArrayList<>();
 		list.add(new ShopBean("Emily","Veste rouge, pantalon noir"));
 		list.add(new ShopBean("Julien","Veste bleu, pantalon blanc"));
