@@ -52,7 +52,7 @@ public class App extends Application {
 		else return null;
 	}
 
-	protected void deconnect(){
+	public void deconnect(){
 		try {
 			LoginManager.getInstance().logOut();
 		}catch (Exception e){

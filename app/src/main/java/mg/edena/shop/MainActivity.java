@@ -84,6 +84,10 @@ public class MainActivity extends BaseActivity  implements AuthBean.AuthUtilsCal
 
 	@Override
 	public void onComplete(AuthBean authBean) {
+		onDadaLoaded(authBean);
+	}
+
+	private void onDadaLoaded(AuthBean authBean) {
 
 		boolean isDeconnect = false;
 		if(authBean != null) {
@@ -93,8 +97,8 @@ public class MainActivity extends BaseActivity  implements AuthBean.AuthUtilsCal
 			if (authResultTask == null
 					|| (authResultTask != null && !authResultTask.isSuccessful())
 					|| graphResponse == null) {
-					isDeconnect = true;
-					Log.e(TAG, "FirebaseAuth authResultTask = null");
+				isDeconnect = true;
+				Log.e(TAG, "FirebaseAuth authResultTask = null");
 			}else{
 				User user = new Gson().fromJson(graphResponse.getRawResponse(),User.class);
 				App.getInstance().setUserLogged(user);
