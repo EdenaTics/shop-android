@@ -14,12 +14,22 @@ public class ShopListFragemntViewModel extends ViewModel {
 
 	private MutableLiveData<List<ShopBean>> list;
 
+	private final MutableLiveData<ShopBean> itemSelected = new MutableLiveData<>();
+
 	public LiveData<List<ShopBean>> getList() {
 		if (list == null) {
 			list = new MutableLiveData<List<ShopBean>>();
 			getData();
 		}
 		return list;
+	}
+
+	public LiveData<ShopBean> getItemSelected() {
+		return itemSelected;
+	}
+
+	public void setItemSelected(ShopBean itemSelected) {
+		this.itemSelected.setValue(itemSelected);
 	}
 
 	private void getData() {

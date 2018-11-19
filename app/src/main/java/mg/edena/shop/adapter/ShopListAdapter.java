@@ -15,10 +15,12 @@ import mg.edena.shop.bean.ShopBean;
 
 public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ViewHolder> {
 
-	List<ShopBean> shopList = new ArrayList<>();
+	private List<ShopBean> shopList = new ArrayList<>();
+	private IAdapterDelegate delegate;
 
-	public ShopListAdapter(List<ShopBean> shopList) {
+	public ShopListAdapter(List<ShopBean> shopList,IAdapterDelegate delegate) {
 		this.shopList = shopList;
+		this.delegate = delegate;
 	}
 
 	@Override
@@ -26,7 +28,7 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ViewHo
 													 int viewType) {
 		View view =  LayoutInflater.from(parent.getContext())
 				.inflate(R.layout.shop_list_item, parent, false);
-		ViewHolder viewHolder = new ViewHolder(view);
+		ViewHolder viewHolder = new ViewHolder(view,delegate);
 		return viewHolder;
 	}
 
@@ -44,16 +46,38 @@ public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ViewHo
 	}
 
 
-	public static class ViewHolder extends RecyclerView.ViewHolder {
+
+	public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 		TextView title;
 		TextView desc;
+		IAdapterDelegate delegate;
 
-		public ViewHolder(View v) {
+		public ViewHolder(View v,IAdapterDelegate delegate) {
 			super(v);
 			title = v.findViewById(R.id.title);
 			desc = v.findViewById(R.id.desc);
+			this.delegate = delegate;
+			v.setOnClickListener(this);
 		}
+
+		@Override
+		public void onClick(View view) {
+			if(this.delegate != null) this.delegate.onItemClick(view,getAdapterPosition());
+		}
+	}
+
+	public IAdapterDelegate getDelegate() {
+		return delegate;
+	}
+
+	public void setDelegate(IAdapterDelegate delegate) {
+		this.delegate = delegate;
+	}
+
+
+	public interface IAdapterDelegate{
+		public void onItemClick(View view, int postion);
 	}
 
 }

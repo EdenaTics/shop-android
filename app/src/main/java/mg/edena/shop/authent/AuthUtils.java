@@ -1,26 +1,16 @@
 package mg.edena.shop.authent;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.jeevandeshmukh.glidetoastlib.GlideToast;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.reactivestreams.Subscriber;
 
 import java.util.Arrays;
 import java.util.List;
