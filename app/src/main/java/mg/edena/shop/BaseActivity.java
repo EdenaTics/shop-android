@@ -45,7 +45,7 @@ public class BaseActivity extends AppCompatActivity implements NetworkReceiver.N
 
 	@Override
 	public void isOnline(boolean status, String labelStatus) {
-		toast(labelStatus,GlideToast.INFOTOAST);
+		//toast(labelStatus,GlideToast.INFOTOAST);
 	}
 
 	private void registerNetworkReceiver(){
@@ -58,11 +58,6 @@ public class BaseActivity extends AppCompatActivity implements NetworkReceiver.N
 		networkReceiver.unregister();
 	}
 
-
-	public void gotoHomePage(){
-		startActivity(new Intent(this,HomeActivity.class));
-
-	}
 
 	public void gotoHomeMainPage(){
 		startActivity(new Intent(this,HomeMainActivity.class));

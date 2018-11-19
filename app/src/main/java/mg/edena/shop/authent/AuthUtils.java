@@ -84,53 +84,5 @@ public class AuthUtils {
 										 }
 									 }
 		);
-
-
-	}
-
-	public void handleFacebookAccessToken(AccessToken token,AuthBean.AuthUtilsCallback authUtilsCallback) {
-		Log.d(TAG, "handleFacebookAccessToken:" + token);
-
-		AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-		firebaseAuth.signInWithCredential(credential)
-				.addOnCompleteListener((Activity) context, new OnCompleteListener<AuthResult>() {
-					@Override
-					public void onComplete(@NonNull Task<AuthResult> task) {
-						if (task.isSuccessful()) {
-							Log.d(TAG, "signInWithCredential:success");
-							FirebaseUser user = firebaseAuth.getCurrentUser();
-							//gotoHomeMainPage();
-						} else {
-							Log.w(TAG, "signInWithCredential:failure", task.getException());
-
-						}
-
-					}
-				});
-	}
-
-
-	public void getFbDetails(AccessToken accessToken){
-		GraphRequest request = GraphRequest.newMeRequest(
-				accessToken,
-				new GraphRequest.GraphJSONObjectCallback() {
-					@Override
-					public void onCompleted(
-							JSONObject object,
-							GraphResponse response) {
-						try {
-							System.out.println("Bienvenue "+object.getString("name"));
-							//gotoHomePage();
-						}
-						catch (JSONException e) {
-							e.printStackTrace();
-						}
-
-					}
-				});
-		Bundle parameters = new Bundle();
-		parameters.putString("fields", "id,name,first_name,last_name,email,link,gender,locale,picture,birthday");
-		request.setParameters(parameters);
-		request.executeAsync();
 	}
 }
