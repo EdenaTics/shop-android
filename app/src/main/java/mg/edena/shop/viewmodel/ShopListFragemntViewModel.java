@@ -41,4 +41,22 @@ public class ShopListFragemntViewModel extends ViewModel {
 	}
 
 
+	public void setSearchItem(String text) {
+		if(text.trim().length() > 0){
+			List<ShopBean> resultList = new ArrayList<>();
+			String filterPattern = text.toLowerCase().trim();
+
+			for (ShopBean item : this.list.getValue()) {
+				if (item.getTitle().toLowerCase().contains(filterPattern)) {
+					resultList.add(item);
+				}
+			}
+
+			this.list.setValue(resultList);
+		}else{
+			getData();
+		}
+	}
+
+
 }

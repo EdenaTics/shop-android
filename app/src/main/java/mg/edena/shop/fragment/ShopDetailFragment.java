@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import mg.edena.shop.R;
 import mg.edena.shop.bean.ShopBean;
-import mg.edena.shop.viewmodel.ShopDetailViewModel;
 import mg.edena.shop.viewmodel.ShopListFragemntViewModel;
 
 public class ShopDetailFragment extends BaseFragment {
@@ -35,7 +34,7 @@ public class ShopDetailFragment extends BaseFragment {
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		mViewModel = ViewModelProviders.of(this).get(ShopListFragemntViewModel.class);
+		mViewModel = ViewModelProviders.of(getActivity()).get(ShopListFragemntViewModel.class);
 		mViewModel.getItemSelected().observe(getActivity(),new Observer<ShopBean>() {
 			@Override
 			public void onChanged(@Nullable ShopBean item) {
@@ -50,7 +49,7 @@ public class ShopDetailFragment extends BaseFragment {
 		title.setText(item.getTitle()!=null?item.getTitle():"");
 
 		TextView desc = rootView.findViewById(R.id.desc);
-		title.setText(item.getDesc()!=null?item.getDesc():"");
+		desc.setText(item.getDesc()!=null?item.getDesc():"");
 
 	}
 

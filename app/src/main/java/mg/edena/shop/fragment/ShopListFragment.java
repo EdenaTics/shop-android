@@ -23,7 +23,6 @@ import java.util.List;
 import mg.edena.shop.R;
 import mg.edena.shop.adapter.ShopListAdapter;
 import mg.edena.shop.bean.ShopBean;
-import mg.edena.shop.viewmodel.ShopDetailViewModel;
 import mg.edena.shop.viewmodel.ShopListFragemntViewModel;
 
 public class ShopListFragment extends BaseFragment implements ShopListAdapter.IAdapterDelegate {
@@ -59,8 +58,8 @@ public class ShopListFragment extends BaseFragment implements ShopListAdapter.IA
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		mShopViewModel = ViewModelProviders.of(this).get(ShopListFragemntViewModel.class);
-		mShopViewModel.getList().observe(this, new Observer<List<ShopBean>>() {
+		mShopViewModel = ViewModelProviders.of(getActivity()).get(ShopListFragemntViewModel.class);
+		mShopViewModel.getList().observe(getActivity(), new Observer<List<ShopBean>>() {
 			@Override
 			public void onChanged(@Nullable List<ShopBean> list) {
 				ShopListAdapter adapterList = new ShopListAdapter(list,ShopListFragment.this);

@@ -1,10 +1,12 @@
 package mg.edena.shop;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -14,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +28,7 @@ import mg.edena.shop.bean.ShopBean;
 import mg.edena.shop.bean.User;
 import mg.edena.shop.fragment.ShopListFragment;
 import mg.edena.shop.service.img.ImgDownloadServiceImpl;
+import mg.edena.shop.viewmodel.ShopListFragemntViewModel;
 
 public class HomeMainActivity extends BaseActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
@@ -73,6 +77,23 @@ public class HomeMainActivity extends BaseActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.home_main, menu);
+		MenuItem searchItem = menu.findItem(R.id.action_search);
+		SearchView searchView = (SearchView) searchItem.getActionView();
+
+		searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+		searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+			@Override
+			public boolean onQueryTextSubmit(String query) {
+				return false;
+			}
+
+			@Override
+			public boolean onQueryTextChange(String text) {
+				ViewModelProviders.of(HomeMainActivity.this).get(ShopListFragemntViewModel.class).setSearchItem(text);
+				return false;
+			}
+		});
 		return true;
 	}
 
@@ -80,7 +101,7 @@ public class HomeMainActivity extends BaseActivity
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 
-		if (id == R.id.action_settings) {
+		if (id == R.id.action_search) {
 			return true;
 		}
 
