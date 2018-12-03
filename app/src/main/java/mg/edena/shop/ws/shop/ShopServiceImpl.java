@@ -13,7 +13,6 @@ import io.reactivex.Observable;
 import mg.edena.shop.model.bean.ShopBean;
 import mg.edena.shop.model.interf.ServiceCallback;
 import mg.edena.shop.model.bean.ResultBean;
-import mg.edena.shop.model.interf.ShopCallback;
 import mg.edena.shop.ws.base.firebase.FireStoreBase;
 
 public class ShopServiceImpl extends FireStoreBase implements ShopService {

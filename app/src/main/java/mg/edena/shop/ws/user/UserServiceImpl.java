@@ -8,7 +8,6 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import mg.edena.shop.model.bean.User;
 import mg.edena.shop.model.interf.ServiceCallback;
-import mg.edena.shop.model.interf.UserCallback;
 import mg.edena.shop.ws.base.retrofit.RetrofitService;
 
 import static mg.edena.shop.ws.base.retrofit.BaseRetrofit.BASE_URL;
