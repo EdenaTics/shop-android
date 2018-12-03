@@ -13,9 +13,9 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import mg.edena.shop.model.bean.User;
-import mg.edena.shop.ws.retrofit.BaseRetrofit;
-import mg.edena.shop.ws.retrofit.RetrofitService;
-import mg.edena.shop.ws.retrofit.impl.UserRetrofit;
+import mg.edena.shop.ws.base.retrofit.BaseRetrofit;
+import mg.edena.shop.ws.base.retrofit.RetrofitService;
+import mg.edena.shop.ws.user.UserService;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -28,7 +28,7 @@ public class UserServiceInstrumentTest {
 
 	@Test
 	public void getList() throws InterruptedException {
-		UserRetrofit userRetrofit = RetrofitService.getRetrofitService(UserRetrofit.class,BaseRetrofit.BASE_URL);
+		UserService userRetrofit = RetrofitService.getRetrofitService(UserService.class,BaseRetrofit.BASE_URL);
 		Observable<List<User>> observable = userRetrofit.getList();
 		Observable obsTest = Observable.just(Collections.<User>emptyList());
 		observable.subscribe(new Observer<List<User>>() {

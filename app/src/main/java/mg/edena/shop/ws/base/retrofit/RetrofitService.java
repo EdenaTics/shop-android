@@ -1,4 +1,4 @@
-package mg.edena.shop.ws.retrofit;
+package mg.edena.shop.ws.base.retrofit;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 

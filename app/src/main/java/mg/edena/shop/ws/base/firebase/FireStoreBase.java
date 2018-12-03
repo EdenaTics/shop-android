@@ -1,8 +1,8 @@
-package mg.edena.shop.ws.firebase.serviceimpl;
+package mg.edena.shop.ws.base.firebase;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import mg.edena.shop.ws.firebase.FFirestore;
+import mg.edena.shop.ws.base.firebase.FFirestore;
 
 public class FireStoreBase {
 	private FirebaseFirestore firebaseFirestore;

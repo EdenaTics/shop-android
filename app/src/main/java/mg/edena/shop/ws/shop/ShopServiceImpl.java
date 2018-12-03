@@ -1,4 +1,4 @@
-package mg.edena.shop.ws.firebase.serviceimpl;
+package mg.edena.shop.ws.shop;
 
 import android.support.annotation.NonNull;
 
@@ -7,16 +7,17 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
+import io.reactivex.Observable;
 import mg.edena.shop.model.bean.ShopBean;
 import mg.edena.shop.model.interf.ServiceCallback;
 import mg.edena.shop.model.bean.ResultBean;
-import mg.edena.shop.service.app.ShopService;
+import mg.edena.shop.model.interf.ShopCallback;
+import mg.edena.shop.ws.base.firebase.FireStoreBase;
 
 public class ShopServiceImpl extends FireStoreBase implements ShopService {
 
-
-	@Override
 	public void getList(ServiceCallback<List<ShopBean>, Throwable> callback) {
 		getFirebaseFirestore().collection("shop").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 			@Override
@@ -33,8 +34,14 @@ public class ShopServiceImpl extends FireStoreBase implements ShopService {
 		});
 	}
 
-	@Override
-	public void add(ShopBean shopBean, ServiceCallback<ShopBean, Throwable> callback) {
 
+	@Override
+	public Observable<List<ShopBean>> list() {
+		return Observable.fromCallable(new Callable<List<ShopBean>>() {
+			@Override
+			public List<ShopBean> call() throws Exception {
+				return null;
+			}
+		});
 	}
 }

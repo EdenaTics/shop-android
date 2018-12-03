@@ -1,4 +1,4 @@
-package mg.edena.shop.ws.firebase;
+package mg.edena.shop.ws.base.firebase;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;

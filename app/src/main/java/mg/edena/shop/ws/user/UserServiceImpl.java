@@ -1,4 +1,4 @@
-package mg.edena.shop.ws.retrofit.impl;
+package mg.edena.shop.ws.user;
 
 import java.util.List;
 
@@ -8,20 +8,19 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import mg.edena.shop.model.bean.User;
 import mg.edena.shop.model.interf.ServiceCallback;
-import mg.edena.shop.service.app.UserService;
-import mg.edena.shop.ws.retrofit.RetrofitService;
+import mg.edena.shop.model.interf.UserCallback;
+import mg.edena.shop.ws.base.retrofit.RetrofitService;
 
-import static mg.edena.shop.ws.retrofit.BaseRetrofit.BASE_URL;
+import static mg.edena.shop.ws.base.retrofit.BaseRetrofit.BASE_URL;
 
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl {
 
-	UserRetrofit retrofit = RetrofitService.getRetrofitService(UserRetrofit.class,BASE_URL);
+	UserService retrofit = RetrofitService.getRetrofitService(UserService.class,BASE_URL);
 
 	public UserServiceImpl() {
 
 	}
 
-	@Override
 	public void getList(final ServiceCallback<List<User>, Throwable> callback) {
 
 		retrofit.getList().subscribeOn(Schedulers.newThread())
