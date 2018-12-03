@@ -1,4 +1,4 @@
-package mg.edena.shop.authent;
+package mg.edena.shop.ui.authent.utils;
 
 import com.facebook.GraphResponse;
 import com.google.android.gms.tasks.Task;
@@ -13,10 +13,5 @@ public class AuthBean {
 		this.graphResponse = graphResponse;
 		this.authResultTask = authResultTask;
 	}
-
-	public interface AuthUtilsCallback{
-		public void onComplete(AuthBean authBean);
-	}
-
 
 }

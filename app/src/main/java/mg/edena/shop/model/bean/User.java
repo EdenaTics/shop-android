@@ -1,4 +1,4 @@
-package mg.edena.shop.bean;
+package mg.edena.shop.model.bean;
 
 import com.google.gson.annotations.SerializedName;
 

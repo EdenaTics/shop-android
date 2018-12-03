@@ -1,4 +1,4 @@
-package mg.edena.shop;
+package mg.edena.shop.ui.authent;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,25 +8,21 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.gson.Gson;
+import com.jeevandeshmukh.glidetoastlib.GlideToast;
 
-import java.util.Arrays;
+import mg.edena.shop.App;
+import mg.edena.shop.R;
+import mg.edena.shop.ui.authent.utils.AuthUtils;
+import mg.edena.shop.ui.base.BaseActivity;
 
-import mg.edena.shop.authent.AuthBean;
-import mg.edena.shop.authent.AuthUtils;
-import mg.edena.shop.bean.User;
-
-public class MainActivity extends BaseActivity  implements AuthBean.AuthUtilsCallback {
+public class MainActivity extends BaseActivity<MainViewModel> implements MainInterface {
 	private final static String TAG = MainActivity.class.getName();
 
 	LoginButton mFBLoginBtn;
 	CallbackManager mFBCallbackManager;
-	AuthUtils mAuthUtils;
+
 
 
 
@@ -35,7 +31,7 @@ public class MainActivity extends BaseActivity  implements AuthBean.AuthUtilsCal
 
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		//setContentView(R.layout.activity_main);
 
 		mFBLoginBtn = (LoginButton) findViewById(R.id.login_button);
 		mFBLoginBtn.setReadPermissions(AuthUtils.fbPermission());
@@ -69,11 +65,20 @@ public class MainActivity extends BaseActivity  implements AuthBean.AuthUtilsCal
 
 	}
 
-	private void handleAccessToken(AccessToken fbAccesToken) {
-		if(mAuthUtils == null) mAuthUtils = new AuthUtils(mAuthFireBase,this);
-		mAuthUtils.getDataUtils(fbAccesToken,this);
+	@Override
+	public MainViewModelFactory getFactory() {
+		return new MainViewModelFactory(mAuthFireBase,this);
 	}
 
+	@Override
+	public Class<MainViewModel> getClassViewModel() {
+		return MainViewModel.class;
+	}
+
+	@Override
+	public int getIdLayoutToInflate() {
+		return R.layout.activity_main;
+	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -81,37 +86,19 @@ public class MainActivity extends BaseActivity  implements AuthBean.AuthUtilsCal
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
-
-	@Override
-	public void onComplete(AuthBean authBean) {
-		onDadaLoaded(authBean);
+	private void handleAccessToken(AccessToken fbAccesToken) {
+		getViewModel().handleFbGetInfoAccessToken(fbAccesToken);
 	}
 
-	private void onDadaLoaded(AuthBean authBean) {
 
-		boolean isDeconnect = false;
-		if(authBean != null) {
-			Task<AuthResult> authResultTask = authBean.authResultTask;
-			GraphResponse graphResponse = authBean.graphResponse;
+	@Override
+	public void authentFinished() {
+		gotoHomeMainPage();
+	}
 
-			if (authResultTask == null
-					|| (authResultTask != null && !authResultTask.isSuccessful())
-					|| graphResponse == null) {
-				isDeconnect = true;
-				Log.e(TAG, "FirebaseAuth authResultTask = null");
-			}else{
-				User user = new Gson().fromJson(graphResponse.getRawResponse(),User.class);
-				App.getInstance().setUserLogged(user);
-			}
-		}else{
-			isDeconnect = true;
-			Log.e(TAG, "AuthBean = null");
-		}
-
-		if (isDeconnect) {
-			App.getInstance().deconnect();
-		} else {
-			gotoHomeMainPage();
-		}
+	@Override
+	public void authentError(Throwable e) {
+		Log.e("Authentification: ","Failed authen "+ e.getMessage());
+		toast(e.getMessage(),GlideToast.FAILTOAST);
 	}
 }

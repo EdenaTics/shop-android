@@ -1,4 +1,4 @@
-package mg.edena.shop.adapter;
+package mg.edena.shop.ui.shop.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import mg.edena.shop.R;
-import mg.edena.shop.bean.ShopBean;
+import mg.edena.shop.model.bean.ShopBean;
 
 public class ShopListAdapter extends RecyclerView.Adapter<ShopListAdapter.ViewHolder> {
 

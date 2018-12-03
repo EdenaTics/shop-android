@@ -1,6 +1,8 @@
-package mg.edena.shop;
+package mg.edena.shop.ui.base;
 
-import android.content.Context;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,20 +15,34 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.jeevandeshmukh.glidetoastlib.GlideToast;
 
+import mg.edena.shop.ui.home.HomeMainActivity;
 import mg.edena.shop.utils.NetworkReceiver;
 
-public class BaseActivity extends AppCompatActivity implements NetworkReceiver.NetworkListner {
+public abstract class BaseActivity<T extends ViewModel> extends AppCompatActivity implements NetworkReceiver.NetworkListner {
 
 	public FirebaseAuth mAuthFireBase;
 	protected FirebaseUser mCurrentUser;
+	private T mViewModel;
 
 	NetworkReceiver networkReceiver = new NetworkReceiver(this);
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		registerNetworkReceiver();
+		setContentView(getIdLayoutToInflate());
+		if(getFactory() == null)
+		mViewModel = ViewModelProviders.of(this).get(getClassViewModel());
+		else mViewModel = ViewModelProviders.of(this, getFactory()).get(getClassViewModel());
 		mAuthFireBase = FirebaseAuth.getInstance();
+		registerNetworkReceiver();
+
 	}
+
+	public abstract ViewModelProvider.Factory getFactory();
+	public abstract Class<T> getClassViewModel();
+	public abstract int getIdLayoutToInflate();
+	public T getViewModel(){
+		return mViewModel;
+	};
 
 	@Override
 	protected void onStart() {

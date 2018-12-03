@@ -1,18 +1,16 @@
-package mg.edena.shop;
+package mg.edena.shop.ui.home;
 
+import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,23 +18,21 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import mg.edena.shop.adapter.ShopListAdapter;
-import mg.edena.shop.bean.ShopBean;
-import mg.edena.shop.bean.User;
-import mg.edena.shop.fragment.ShopListFragment;
+import mg.edena.shop.App;
+import mg.edena.shop.R;
+import mg.edena.shop.model.bean.User;
+import mg.edena.shop.ui.shop.ShopListFragment;
 import mg.edena.shop.service.img.ImgDownloadServiceImpl;
-import mg.edena.shop.viewmodel.ShopListFragemntViewModel;
+import mg.edena.shop.ui.base.BaseActivity;
+import mg.edena.shop.ui.shop.ShopListFragemntViewModel;
 
-public class HomeMainActivity extends BaseActivity
+public class HomeMainActivity extends BaseActivity<HomeViewModel>
 		implements NavigationView.OnNavigationItemSelectedListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_home_main);
+		//setContentView(R.layout.activity_home_main);
 		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		setSupportActionBar(toolbar);
 
@@ -62,6 +58,21 @@ public class HomeMainActivity extends BaseActivity
 		setViewDrawer(navigationView.getHeaderView(0));
 		addFragment(ShopListFragment.newInstance(),R.id.idFragment);
 
+	}
+
+	@Override
+	public ViewModelProvider.Factory getFactory() {
+		return null;
+	}
+
+	@Override
+	public Class<HomeViewModel> getClassViewModel() {
+		return HomeViewModel.class;
+	}
+
+	@Override
+	public int getIdLayoutToInflate() {
+		return R.layout.activity_home_main;
 	}
 
 	@Override

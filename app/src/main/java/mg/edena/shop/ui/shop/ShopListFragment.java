@@ -1,7 +1,6 @@
-package mg.edena.shop.fragment;
+package mg.edena.shop.ui.shop;
 
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,15 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import mg.edena.shop.R;
-import mg.edena.shop.adapter.ShopListAdapter;
-import mg.edena.shop.bean.ShopBean;
-import mg.edena.shop.viewmodel.ShopListFragemntViewModel;
+import mg.edena.shop.ui.shop.adapter.ShopListAdapter;
+import mg.edena.shop.model.bean.ShopBean;
+import mg.edena.shop.ui.base.BaseFragment;
 
-public class ShopListFragment extends BaseFragment implements ShopListAdapter.IAdapterDelegate {
+public class ShopListFragment extends BaseFragment<ShopListFragemntViewModel> implements ShopListAdapter.IAdapterDelegate {
 
 	private ShopListFragemntViewModel mShopViewModel;
 	private RecyclerView mShopRecyclerView;
@@ -41,11 +39,21 @@ public class ShopListFragment extends BaseFragment implements ShopListAdapter.IA
 	@Override
 	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
 							 @Nullable Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.shop_list_fragment, container, false);
+		View v = super.onCreateView(inflater,container,savedInstanceState);
 		setUpAnimationLayoutContraint(v);
 		setUpRecyclerView(v);
 		setUpDetailFragment();
 		return v;
+	}
+
+	@Override
+	public int getIdLayoutToInflate() {
+		return R.layout.shop_list_fragment;
+	}
+
+	@Override
+	public Class getClazzTmodel() {
+		return ShopListFragemntViewModel.class;
 	}
 
 	private void setUpAnimationLayoutContraint(View v) {
@@ -58,8 +66,8 @@ public class ShopListFragment extends BaseFragment implements ShopListAdapter.IA
 	@Override
 	public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		mShopViewModel = ViewModelProviders.of(getActivity()).get(ShopListFragemntViewModel.class);
-		mShopViewModel.getList().observe(getActivity(), new Observer<List<ShopBean>>() {
+		//mShopViewModel = ViewModelProviders.of(getActivity()).get(ShopListFragemntViewModel.class);
+		getViewModel().getList().observe(getActivity(), new Observer<List<ShopBean>>() {
 			@Override
 			public void onChanged(@Nullable List<ShopBean> list) {
 				ShopListAdapter adapterList = new ShopListAdapter(list,ShopListFragment.this);
@@ -73,8 +81,6 @@ public class ShopListFragment extends BaseFragment implements ShopListAdapter.IA
 		mShopRecyclerView = v.findViewById(R.id.list);
 		mShopRecyclerView.setLayoutManager(new LinearLayoutManager(mShopRecyclerView.getContext()));
 		//recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), VERTICAL));
-
-
 	}
 
 	private void setUpDetailFragment(){
@@ -84,7 +90,7 @@ public class ShopListFragment extends BaseFragment implements ShopListAdapter.IA
 
 	@Override
 	public void onItemClick(View view, int postion) {
-		showDetail(mShopViewModel.getList().getValue().get(postion));
+		showDetail(getViewModel().getList().getValue().get(postion));
 	}
 
 	private void showDetail(ShopBean item){
@@ -95,7 +101,7 @@ public class ShopListFragment extends BaseFragment implements ShopListAdapter.IA
 	}
 
 	private void setUiDetail(ShopBean item){
-		mShopViewModel.setItemSelected(item);
+		getViewModel().setItemSelected(item);
 	}
 
 	private boolean animateLayout(){

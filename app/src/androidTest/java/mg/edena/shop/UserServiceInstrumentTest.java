@@ -12,7 +12,7 @@ import java.util.List;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
-import mg.edena.shop.bean.User;
+import mg.edena.shop.model.bean.User;
 import mg.edena.shop.ws.retrofit.BaseRetrofit;
 import mg.edena.shop.ws.retrofit.RetrofitService;
 import mg.edena.shop.ws.retrofit.impl.UserRetrofit;

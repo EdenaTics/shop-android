@@ -1,4 +1,4 @@
-package mg.edena.shop.bean;
+package mg.edena.shop.model.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;

@@ -1,15 +1,15 @@
-package mg.edena.shop.viewmodel;
+package mg.edena.shop.ui.shop;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.arch.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import mg.edena.shop.bean.ShopBean;
+import mg.edena.shop.model.bean.ShopBean;
+import mg.edena.shop.ui.base.BaseViewModel;
 
-public class ShopListFragemntViewModel extends ViewModel {
+public class ShopListFragemntViewModel extends BaseViewModel {
 	private static final String TAG = ShopListFragemntViewModel.class.getCanonicalName();
 
 	private MutableLiveData<List<ShopBean>> list;

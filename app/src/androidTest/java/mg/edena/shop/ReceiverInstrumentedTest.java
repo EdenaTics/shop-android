@@ -1,11 +1,8 @@
 package mg.edena.shop;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -15,22 +12,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.Collections;
-import java.util.List;
-
-import io.reactivex.Observable;
-import mg.edena.shop.bean.User;
+import mg.edena.shop.ui.home.HomeMainActivity;
 import mg.edena.shop.utils.NetworkReceiver;
-import mg.edena.shop.ws.retrofit.BaseRetrofit;
-import mg.edena.shop.ws.retrofit.RetrofitService;
-import mg.edena.shop.ws.retrofit.impl.UserRetrofit;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
 public class ReceiverInstrumentedTest {
-	@Rule public ActivityTestRule<HomeActivity> homeActivityActivityTestRule = new ActivityTestRule<>(HomeActivity.class);
+	@Rule public ActivityTestRule<HomeMainActivity> homeActivityActivityTestRule = new ActivityTestRule<>(HomeMainActivity.class);
 
 	@Test
 	public void useAppContext() {

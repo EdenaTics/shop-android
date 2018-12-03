@@ -5,7 +5,7 @@
     android:id="@+id/rootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.ShopListFragment">
+    tools:context=".ui.shop.ShopListFragment">
     <FrameLayout
         android:visibility="invisible"
         android:id="@+id/detailLayout"

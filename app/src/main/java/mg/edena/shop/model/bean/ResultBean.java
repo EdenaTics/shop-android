@@ -1,13 +1,13 @@
-package mg.edena.shop.service;
+package mg.edena.shop.model.bean;
 
-public class ServiceCallbackBean {
+public class ResultBean {
 	private int status;
 	private String mess;
 	private String result;
 
-	public ServiceCallbackBean(){}
+	public ResultBean(){}
 
-	public ServiceCallbackBean(int status, String mess, String result) {
+	public ResultBean(int status, String mess, String result) {
 		this.status = status;
 		this.mess = mess;
 		this.result = result;

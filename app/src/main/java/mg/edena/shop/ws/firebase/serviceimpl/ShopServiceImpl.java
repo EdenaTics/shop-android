@@ -8,9 +8,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
 
-import mg.edena.shop.bean.ShopBean;
-import mg.edena.shop.service.ServiceCallback;
-import mg.edena.shop.service.ServiceCallbackBean;
+import mg.edena.shop.model.bean.ShopBean;
+import mg.edena.shop.model.interf.ServiceCallback;
+import mg.edena.shop.model.bean.ResultBean;
 import mg.edena.shop.service.app.ShopService;
 
 public class ShopServiceImpl extends FireStoreBase implements ShopService {
@@ -21,7 +21,7 @@ public class ShopServiceImpl extends FireStoreBase implements ShopService {
 		getFirebaseFirestore().collection("shop").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
 			@Override
 			public void onComplete(@NonNull Task<QuerySnapshot> task) {
-				ServiceCallbackBean value = new ServiceCallbackBean();
+				ResultBean value = new ResultBean();
 				if(task == null){
 					value.setStatus(-1);
 					if(callback != null) callback.onFaillure(new Throwable());
