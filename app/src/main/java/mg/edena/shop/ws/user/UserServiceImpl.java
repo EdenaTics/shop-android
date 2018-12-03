@@ -3,6 +3,7 @@ package mg.edena.shop.ws.user;
 import java.util.List;
 
 import io.reactivex.Observer;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -23,26 +24,20 @@ public class UserServiceImpl {
 	public void getList(final ServiceCallback<List<User>, Throwable> callback) {
 
 		retrofit.getList().subscribeOn(Schedulers.newThread())
-				.observeOn(AndroidSchedulers.mainThread()).subscribe(new Observer<List<User>>() {
+				.observeOn(AndroidSchedulers.mainThread()).subscribe(new SingleObserver<List<User>>() {
 			@Override
 			public void onSubscribe(Disposable d) {
 
 			}
 
 			@Override
-			public void onNext(List<User> users) {
+			public void onSuccess(List<User> users) {
 				if(callback != null) callback.onSucces(users);
 			}
 
 			@Override
 			public void onError(Throwable e) {
 				if(callback != null) callback.onFaillure(e);
-
-			}
-
-			@Override
-			public void onComplete() {
-
 			}
 		});
 	}
