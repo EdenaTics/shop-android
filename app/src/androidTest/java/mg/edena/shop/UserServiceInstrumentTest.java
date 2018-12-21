@@ -11,6 +11,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import io.reactivex.Observer;
+import io.reactivex.Single;
 import io.reactivex.disposables.Disposable;
 import mg.edena.shop.model.bean.User;
 import mg.edena.shop.ws.base.retrofit.BaseRetrofit;
@@ -29,30 +30,9 @@ public class UserServiceInstrumentTest {
 	@Test
 	public void getList() throws InterruptedException {
 		UserService userRetrofit = RetrofitService.getRetrofitService(UserService.class,BaseRetrofit.BASE_URL);
-		Observable<List<User>> observable = userRetrofit.getList();
+		Single<List<User>> observable = userRetrofit.getList();
 		Observable obsTest = Observable.just(Collections.<User>emptyList());
-		observable.subscribe(new Observer<List<User>>() {
-			@Override
-			public void onSubscribe(Disposable d) {
-
-			}
-
-			@Override
-			public void onNext(List<User> users) {
-					list = users;
-			}
-
-			@Override
-			public void onError(Throwable e) {
-				System.out.println(e.getMessage());
-
-			}
-
-			@Override
-			public void onComplete() {
-				System.out.println("onComplete");
-			}
-		});
+		observable.subscribe();
 		Thread.sleep(3000);
 		assertThat(list,Matchers.notNullValue());
 	}

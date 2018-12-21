@@ -1,4 +1,4 @@
-package mg.edena.shop.model.bean;
+package mg.edena.shop.model.api;
 
 public class ResultBean {
 	private int status;

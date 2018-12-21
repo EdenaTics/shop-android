@@ -21,8 +21,6 @@ import java.security.NoSuchAlgorithmException;
 public class CommonUtils {
 
 	public static void getKeyHash(Context cxt) {
-
-
 		try {
 			if(Build.VERSION.SDK_INT >= 28) {
 				final PackageInfo packageInfo = cxt.getPackageManager().getPackageInfo(cxt.getPackageName(), PackageManager.GET_SIGNING_CERTIFICATES);
