@@ -29,9 +29,7 @@ public abstract class BaseActivity<T extends ViewModel> extends AppCompatActivit
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(getIdLayoutToInflate());
-		if(getFactory() == null)
-		mViewModel = ViewModelProviders.of(this).get(getClassViewModel());
-		else mViewModel = ViewModelProviders.of(this, getFactory()).get(getClassViewModel());
+		mViewModel = ViewModelProviders.of(this, getFactory()).get(getClassViewModel());
 		mAuthFireBase = FirebaseAuth.getInstance();
 		registerNetworkReceiver();
 
