@@ -1,4 +1,2 @@
 # shop-android
-Shop together 
-Rxandroid
-Retrofit
+Shop together
