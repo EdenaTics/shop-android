@@ -1,14 +1,14 @@
 {
-  "id": "102172994103267256",
-  "name": "Ran Li",
-  "first_name": "Ran",
+  "id": "xxx",
+  "name": "XX Li",
+  "first_name": "XXX",
   "last_name": "Li",
-  "email": "edena.tic@gmail.com",
+  "email": "xxx@xxx.com",
   "picture": {
     "data": {
       "height": 50,
       "is_silhouette": false,
-      "url": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=102172994103267256&height=50&width=50&ext=1542545716&hash=AeTX7NjsyON3wBIO",
+      "url": "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=xxxx&height=50&width=50&ext=xxx&hash=xxx",
       "width": 50
     }
   },
